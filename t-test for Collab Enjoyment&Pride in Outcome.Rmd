@@ -11,11 +11,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(tidyverse)
+scale_data <- read.csv("/home/zzeng1/Innovation80/Innovation80/Scale Data - Sheet1.csv")
 ```
-```{r}
-# Rename the dataset
-scale_data <- Scale_Data_Sheet1
-```
+
+
+
 
 ```{r}
 # Rename the columns
@@ -67,13 +67,13 @@ colnames(scale_data)
 ```{r}
 # Boxplot comparing Collab Enjoyment for Pre and Post survey types
 library(ggplot2)
-ggplot(scale_data, aes(x = Survey.Type, y = `Collab.Enjoyment`, fill = Survey.Type)) +
+ggplot(scale_data, aes(x = survey_type, y = `collab_enjoyment`, fill = survey_type)) +
   geom_boxplot() +
   labs(title = "Boxplot of Collab Enjoyment by Survey Type", x = "Survey Type", y = "Collab Enjoyment") +
   theme_minimal()
 
 # Boxplot comparing Pride in Outcome for Pre and Post survey types
-ggplot(scale_data, aes(x = Survey.Type, y = `Pride.in.Outcome`, fill = Survey.Type)) +
+ggplot(scale_data, aes(x = survey_type, y = `pride_in_outcome`, fill = survey_type)) +
   geom_boxplot() +
   labs(title = "Boxplot of Pride in Outcome by Survey Type", x = "Survey Type", y = "Pride in Outcome") +
   theme_minimal()
@@ -81,13 +81,13 @@ ggplot(scale_data, aes(x = Survey.Type, y = `Pride.in.Outcome`, fill = Survey.Ty
 ```
 ```{r}
 # Boxplot comparing Collab Enjoyment for Young and Senior participant types
-ggplot(scale_data, aes(x = Participant.Type, y = `Collab.Enjoyment`, fill = Participant.Type)) +
+ggplot(scale_data, aes(x = Participant_Type, y = `collab_enjoyment`, fill = Participant_Type)) +
   geom_boxplot() +
   labs(title = "Boxplot of Collab Enjoyment by Participant Type", x = "Participant Type", y = "Collab Enjoyment") +
   theme_minimal()
 
 # Boxplot comparing Pride in Outcome for Young and Senior participant types
-ggplot(scale_data, aes(x = Participant.Type, y = `Pride.in.Outcome`, fill = Participant.Type)) +
+ggplot(scale_data, aes(x = Participant_Type, y = `pride_in_outcome`, fill = Participant_Type)) +
   geom_boxplot() +
   labs(title = "Boxplot of Pride in Outcome by Participant Type", x = "Participant Type", y = "Pride in Outcome") +
   theme_minimal()
