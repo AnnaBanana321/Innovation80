@@ -1,0 +1,53 @@
+---
+title: "Correlation test"
+author: "Ziling Zeng"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+getwd()
+scale_data_1 <- read.csv("/home/zzeng1/Innovation80/Scale Data - Sheet1.csv")
+
+# Check the first few rows of the dataset to ensure it's loaded correctly
+head(scale_data_1)
+
+```
+```{r}
+# Check the class of the variables to ensure they are numeric
+class(scale_data_1$Attendance)
+class(scale_data_1$Meaning.Level)
+
+# If they are not numeric, convert them to numeric
+scale_data_1$Attendance <- as.numeric(scale_data_1$Attendance)
+scale_data_1$Meaning.Level <- as.numeric(scale_data_1$Meaning.Level)
+
+# Perform the correlation test again
+correlation_test <- cor.test(scale_data_1$Attendance, scale_data_1$Meaning.Level, method = "pearson")
+
+# Print the results of the correlation test
+correlation_test
+
+```
+
+The Pearson correlation test between "Attendance" and "Meaning.Level" yielded a correlation coefficient of -0.0062, which is very close to zero, suggesting an almost non-existent linear relationship between the two variables. The test statistic was t = -0.052, and the p-value was 0.9587, which is much higher than the commonly used threshold of 0.05. This indicates that the observed correlation is not statistically significant. Additionally, the 95% confidence interval for the correlation coefficient ranges from -0.2375 to 0.2258, which includes zero, further supporting the conclusion that there is no meaningful relationship between "Attendance" and "Meaning.Level." Thus, we fail to reject the null hypothesis, and we conclude that there is no significant correlation between the two variables.
+
+```{r}
+# Scatter plot to show the relationship between Attendance and meaning_level
+library(ggplot2)
+ggplot(scale_data_1, aes(x = Attendance, y = Meaning.Level)) +
+  geom_point() +  # Adds scatter plot points
+  geom_smooth(method = "lm", se = FALSE, color = "blue") + # Adds a linear regression line
+  labs(title = "Scatter Plot of Attendance vs. Meaning Level", 
+       x = "Attendance", 
+       y = "Meaning Level") +
+  theme_minimal()
+
+```
+
+

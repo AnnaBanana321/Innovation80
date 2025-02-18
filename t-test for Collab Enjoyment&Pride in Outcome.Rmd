@@ -1,0 +1,96 @@
+---
+title: "Innovation80 Project"
+author: "Ziling Zeng"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+```{r}
+# Rename the dataset
+scale_data <- Scale_Data_Sheet1
+```
+
+```{r}
+# Rename the columns
+colnames(scale_data) <- c("Participant_ID", "Participant_Type", "Program_Name", 
+                          "survey_type", "difficulty_relate", "collab_equal_contribution", 
+                          "collab_enjoyment", "pride_in_outcome", "attendance", "meaning_level")
+
+```
+
+```{r}
+
+# Subset the data for Pre and Post Survey Types
+pre_data <- scale_data[scale_data$survey_type == "Pre", c("collab_enjoyment", "pride_in_outcome")]
+post_data <- scale_data[scale_data$survey_type == "Post", c("collab_enjoyment", "pride_in_outcome")]
+
+# Paired t-test for Collab Enjoyment
+collab_enjoyment_test <- t.test(pre_data$collab_enjoyment, post_data$collab_enjoyment, paired = FALSE)
+print(collab_enjoyment_test)
+
+# Paired t-test for Pride in Outcome
+pride_outcome_test <- t.test(pre_data$pride_in_outcome, post_data$pride_in_outcome, paired = FALSE)
+print(pride_outcome_test)
+
+```
+The results of the t-tests for both "Collab Enjoyment" and "Pride in Outcome" indicate significant differences between the "Pre" and "Post" survey responses. For "Collab Enjoyment," the mean score in the "Post" survey (5.00) was significantly higher than in the "Pre" survey (4.13), with a t-statistic of -6.2104 and a p-value of 1.873e-08. Similarly, for "Pride in Outcome," the "Post" mean (5.00) was also higher than the "Pre" mean (4.08), with a t-statistic of -5.8153 and a p-value of 1.035e-07. In both cases, the 95% confidence intervals for the differences in means were entirely below zero, indicating that the increases were statistically significant. These results suggest that participants experienced a notable improvement in both their enjoyment of collaboration and their pride in the outcomes from "Pre" to "Post," providing strong evidence that the interventions or changes measured between these two time points had a positive impact.
+
+```{r}
+# Subset the data for Senior and Young Participant Types
+senior_data <- scale_data[scale_data$Participant_Type == "Senior", c("collab_enjoyment", "pride_in_outcome")]
+young_data <- scale_data[scale_data$Participant_Type == "Young", c("collab_enjoyment", "pride_in_outcome")]
+
+# Paired t-test for Collab Enjoyment between Senior and Young participants
+collab_enjoyment_test <- t.test(senior_data$collab_enjoyment, young_data$collab_enjoyment, paired = FALSE)
+print(collab_enjoyment_test)
+
+# Paired t-test for Pride in Outcome between Senior and Young participants
+pride_outcome_test <- t.test(senior_data$pride_in_outcome, young_data$pride_in_outcome, paired = FALSE)
+print(pride_outcome_test)
+
+```
+The results of the independent t-tests comparing "Collab Enjoyment" and "Pride in Outcome" between "Senior" and "Young" participants show no statistically significant differences. For "Collab Enjoyment," the mean score for "Young" participants (4.64) was slightly higher than that of "Senior" participants (4.36), but the p-value of 0.1308 exceeds the 0.05 threshold, indicating that the difference is not significant. Similarly, for "Pride in Outcome," "Young" participants (mean = 4.68) again reported slightly higher scores than "Senior" participants (mean = 4.38), but the p-value of 0.09563 is also greater than 0.05, suggesting that the difference is not statistically significant at the 5% level. The confidence intervals for both tests include zero, further supporting the conclusion that there is no meaningful difference between the two groups in terms of "Collab Enjoyment" and "Pride in Outcome."
+
+```{r}
+colnames(scale_data)
+
+```
+
+
+```{r}
+# Boxplot comparing Collab Enjoyment for Pre and Post survey types
+library(ggplot2)
+ggplot(scale_data, aes(x = Survey.Type, y = `Collab.Enjoyment`, fill = Survey.Type)) +
+  geom_boxplot() +
+  labs(title = "Boxplot of Collab Enjoyment by Survey Type", x = "Survey Type", y = "Collab Enjoyment") +
+  theme_minimal()
+
+# Boxplot comparing Pride in Outcome for Pre and Post survey types
+ggplot(scale_data, aes(x = Survey.Type, y = `Pride.in.Outcome`, fill = Survey.Type)) +
+  geom_boxplot() +
+  labs(title = "Boxplot of Pride in Outcome by Survey Type", x = "Survey Type", y = "Pride in Outcome") +
+  theme_minimal()
+
+```
+```{r}
+# Boxplot comparing Collab Enjoyment for Young and Senior participant types
+ggplot(scale_data, aes(x = Participant.Type, y = `Collab.Enjoyment`, fill = Participant.Type)) +
+  geom_boxplot() +
+  labs(title = "Boxplot of Collab Enjoyment by Participant Type", x = "Participant Type", y = "Collab Enjoyment") +
+  theme_minimal()
+
+# Boxplot comparing Pride in Outcome for Young and Senior participant types
+ggplot(scale_data, aes(x = Participant.Type, y = `Pride.in.Outcome`, fill = Participant.Type)) +
+  geom_boxplot() +
+  labs(title = "Boxplot of Pride in Outcome by Participant Type", x = "Participant Type", y = "Pride in Outcome") +
+  theme_minimal()
+
+```
+
