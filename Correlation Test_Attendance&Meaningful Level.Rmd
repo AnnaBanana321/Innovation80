@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 getwd()
-scale_data_1 <- read.csv("/home/zzeng1/Innovation80/Scale Data - Sheet1.csv")
+scale_data_1 <- read.csv("/home/zzeng1/Innovation80/Innovation80/Scale Data - Sheet1.csv")
 
 # Check the first few rows of the dataset to ensure it's loaded correctly
 head(scale_data_1)
