@@ -11,7 +11,7 @@
 
 <meta name="author" content="Ziling Zeng" />
 
-<meta name="date" content="2025-02-17" />
+<meta name="date" content="2025-02-18" />
 
 <title>Innovation80 Project</title>
 
@@ -358,7 +358,7 @@ pre code {
 
 <h1 class="title toc-ignore">Innovation80 Project</h1>
 <h4 class="author">Ziling Zeng</h4>
-<h4 class="date">2025-02-17</h4>
+<h4 class="date">2025-02-18</h4>
 
 </div>
 
@@ -455,6 +455,29 @@ print(pride_outcome_test)</code></pre>
 ## sample estimates:
 ## mean of x mean of y 
 ##  4.378378  4.679775</code></pre>
+<pre class="r"><code># Check summary statistics for the variables in both groups
+summary(young_data$collab_enjoyment)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1.00    4.50    5.00    4.64    5.00    5.00</code></pre>
+<pre class="r"><code>summary(senior_data$collab_enjoyment)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##   1.000   5.000   5.000   4.365   5.000   5.000       3</code></pre>
+<pre class="r"><code>summary(young_data$pride_in_outcome)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1.00    5.00    5.00    4.68    5.00    5.00</code></pre>
+<pre class="r"><code>summary(senior_data$pride_in_outcome)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##   1.000   5.000   5.000   4.378   5.000   5.000       3</code></pre>
+<pre class="r"><code># Check for unique values in both groups for Collab Enjoyment
+unique(young_data$collab_enjoyment)</code></pre>
+<pre><code>## [1] 5.0 4.0 3.0 4.5 1.0</code></pre>
+<pre class="r"><code>unique(senior_data$collab_enjoyment)</code></pre>
+<pre><code>## [1]  5  1  3  4 NA  2</code></pre>
+<pre class="r"><code># Check for unique values in both groups for Pride in Outcome
+unique(young_data$pride_in_outcome)</code></pre>
+<pre><code>## [1] 5.0 4.0 4.5 3.0 1.0 1.5</code></pre>
+<pre class="r"><code>unique(senior_data$pride_in_outcome)</code></pre>
+<pre><code>## [1]  5  1  3  2 NA  4</code></pre>
 <p>The results of the independent t-tests comparing “Collab Enjoyment”
 and “Pride in Outcome” between “Senior” and “Young” participants show no
 statistically significant differences. For “Collab Enjoyment,” the mean
@@ -468,12 +491,6 @@ that the difference is not statistically significant at the 5% level.
 The confidence intervals for both tests include zero, further supporting
 the conclusion that there is no meaningful difference between the two
 groups in terms of “Collab Enjoyment” and “Pride in Outcome.”</p>
-<pre class="r"><code>colnames(scale_data)</code></pre>
-<pre><code>##  [1] &quot;Participant_ID&quot;            &quot;Participant_Type&quot;         
-##  [3] &quot;Program_Name&quot;              &quot;survey_type&quot;              
-##  [5] &quot;difficulty_relate&quot;         &quot;collab_equal_contribution&quot;
-##  [7] &quot;collab_enjoyment&quot;          &quot;pride_in_outcome&quot;         
-##  [9] &quot;attendance&quot;                &quot;meaning_level&quot;</code></pre>
 <pre class="r"><code># Boxplot comparing Collab Enjoyment for Pre and Post survey types
 library(ggplot2)
 ggplot(scale_data, aes(x = survey_type, y = `collab_enjoyment`, fill = survey_type)) +
