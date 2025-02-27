@@ -65,8 +65,48 @@ unique(data_table$Participant_Type)
 # Print plot
 print(plot)
 
-
-
 ```
 
 The results of the chi-square test indicate a significant association between participant type (senior vs. young) and responses to the survey item "unable to understand my perspective" (χ²(2) = 103.32, p < .001). The visualization suggests that young participants were more likely to select "No," indicating that they did not perceive others as unable to understand their perspective, whereas seniors had a more balanced distribution between "Yes" and "No" responses. Given the strong statistical significance, the differences observed are unlikely due to random chance and suggest meaningful distinctions in how seniors and young participants perceive perspective-taking in interactions. Further analysis, such as standardized residuals, could clarify which response categories contribute most to the observed association.
+
+### Separate Code Chunk for Disinterest in Interaction ###
+
+```{r}
+colnames(binarydata)
+
+# Exclude programs without any data for Disinterest in Interaction
+binarydata <- binarydata %>% group_by(Program.Name) %>% filter(any(!is.na(Disinterest.in.Interaction))) %>% ungroup()
+
+# Count total participants in each group after filtering
+total_counts_disinterest <- binarydata %>% group_by(Participant.Type) %>% summarise(Total = n())
+print(total_counts_disinterest)
+
+# Create contingency table for Disinterest in Interaction
+table_disinterest <- table(binarydata$Participant.Type, binarydata$Disinterest.in.Interaction)
+
+# Run the Chi-square test for Disinterest in Interaction
+chi_square_disinterest <- chisq.test(table_disinterest)
+print(chi_square_disinterest)
+print(chi_square_disinterest$expected)
+
+# Convert contingency table to data frame
+data_table_disinterest <- as.data.frame(table_disinterest)
+colnames(data_table_disinterest) <- c("Participant_Type", "Disinterest_Interaction", "Count")
+
+# Plot Disinterest in Interaction
+plot_disinterest <- ggplot(data_table_disinterest, aes(x = Disinterest_Interaction, y = Count, fill = Participant_Type)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Disinterest in Interaction by Participant Type",
+       x = "Disinterest in Interaction",
+       y = "Count") +
+  theme_minimal() +
+  scale_fill_manual(values = c("blue", "orange"))
+
+# Print plot
+print(plot_disinterest)
+
+
+```
+A chi-square test of independence was conducted to examine the association between participant type (Senior vs. Young) and responses to the statement "uninterested in getting to know someone older." The results indicated a statistically significant relationship, χ²(2) = 101.79, p < .001, suggesting that seniors and young participants differed in their responses.
+
+The visualization suggests that young participants were more likely to respond "No", indicating that they do not perceive themselves as uninterested in getting to know someone older. Conversely, seniors had a more balanced distribution of responses. This pattern suggests that age-related social preferences may influence openness to intergenerational interactions, with younger participants potentially being more neutral or open to engaging with older individuals than expected.
