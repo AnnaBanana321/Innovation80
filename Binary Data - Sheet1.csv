@@ -1,0 +1,169 @@
+Participant ID,Participant Type,Program Name,Survey Type,Difficulty Relating,Language Barrier,Disinterest in Interaction,Perspective Understanding,Inflexibility Perception,Understanding,Negative Judgement,Difficulty Hear & Think
+1,Senior,West BLUES,Pre,4,,Yes,,,,,
+2,Senior,West BLUES,Pre,1,No,No,No,,,,
+3,Senior,West BLUES,Pre,1,No,No,No,,,,
+4,Senior,West BLUES,Pre,2,No,No,No,,,,
+5,Senior,West BLUES,Pre,1,No,No,No,,,,
+6,Senior,West BLUES,Pre,5,No,No,No,,,,
+7,Senior,West BLUES,Pre,2,No,No,No,,,,
+8,Senior,West BLUES,Pre,,Yes,Yes,Yes,,,,
+9,Senior,West BLUES,Pre,1,Yes,No,No,,,,
+10,Senior,West BLUES,Pre,1,,,Yes,,,,
+11,Young,West BLUES,Pre,2,,,,Yes,No,No,
+12,Young,West BLUES,Pre,2,,,,No,No,No,
+13,Young,West BLUES,Pre,3,,,,No,No,No,
+14,Young,West BLUES,Pre,1,,,,No,Yes,No,
+15,Young,West BLUES,Pre,2,,,,No,No,No,
+16,Young,West BLUES,Pre,3,,,,Yes,No,No,
+17,Young,West BLUES,Pre,2,,,,No,Yes,No,
+18,Young,West BLUES,Pre,2,,,,No,Yes,No,
+19,Young,West BLUES,Pre,5,,,,Yes,No,No,
+20,Young,West BLUES,Pre,3,,,,,Yes,,
+21,Young,West BLUES,Pre,2,,,,Yes,No,,No
+22,Young,West BLUES,Post,1,,,,No,No,,No
+23,Young,West BLUES,Post,1,,,,No,No,,No
+24,Young,West BLUES,Post,3,,,,No,No,,No
+25,Young,West BLUES,Post,1,,,,No,No,,No
+26,Young,West BLUES,Post,2,,,,Yes,No,,No
+27,Young,West BLUES,Post,,,,,No,No,,No
+28,Young,West BLUES,Post,5,,,,No,No,,No
+29,Young,West BLUES,Post,1,,,,No,No,,No
+30,Young,West BLUES,Post,2,,,,No,No,,No
+31,Young,West BLUES,Post,2,,,,No,No,,No
+32,Young,West BLUES,Post,2,,,,No,No,,No
+33,Senior,West R&B,Pre,1,,,,,,,
+34,Senior,West R&B,Pre,4,No,No,No,,,,
+35,Senior,West R&B,Pre,1,No,No,No,,,,
+36,Senior,West R&B,Pre,1,Yes,No,No,,,,
+37,Senior,West R&B,Pre,1,No,Yes,No,,,,
+38,Senior,West R&B,Pre,1,No,No,No,,,,
+39,Senior,West R&B,Pre,2,No,No,No,,,,
+40,Senior,West R&B,Pre,,,,,,,,
+41,Senior,West R&B,Pre,1,No,No,No,,,,
+42,Senior,West R&B,Pre,1,No,No,No,,,,
+43,Young,West R&B,Pre,2,,,,No,No,No,
+44,Young,West R&B,Pre,,,,,No,No,No,
+45,Young,West R&B,Pre,3,,,,Yes,No,No,
+46,Young,West R&B,Pre,2,,,,No,Yes,No,
+47,Young,West R&B,Pre,2,,,,No,,No,
+48,Young,West R&B,Pre,1,,,,Yes,No,No,
+49,Young,West R&B,Pre,4,,,,No,Yes,No,
+50,Young,West R&B,Pre,1,,,,No,No,No,
+51,Young,West R&B,Pre,2,,,,No,Yes,No,
+52,Young,West R&B,Pre,1,,,,No,No,No,
+53,Senior,West R&B,Post,1,No,No,No,,,,
+54,Senior,West R&B,Post,1,No,No,No,,,,
+55,Senior,West R&B,Post,1,No,No,No,,,,
+56,Senior,West R&B,Post,1,No,No,No,,,,
+57,Senior,West R&B,Post,1,No,No,No,,,,
+58,Senior,West R&B,Post,1,No,No,No,,,,
+59,Senior,West R&B,Post,1,No,No,No,,,,
+60,Senior,West R&B,Post,1,No,No,No,,,,
+61,Senior,West R&B,Post,4,Yes,No,No,,,,
+62,Senior,West R&B,Post,1,No,No,No,,,,
+63,Senior,West R&B,Post,1,No,No,No,,,,
+64,Young,West R&B,Post,3,,,,Yes,Yes,,Yes
+65,Young,West R&B,Post,2.5,,,,No,No,,No
+66,Young,West R&B,Post,1,,,,No,No,,No
+67,Young,West R&B,Post,,,,,No,No,,No
+68,Young,West R&B,Post,4,,,,No,No,,No
+69,Young,West R&B,Post,1,,,,No,No,,No
+70,Young,West R&B,Post,1,,,,No,No,,No
+71,Young,West R&B,Post,1,,,,No,No,,No
+72,Young,West R&B,Post,,,,,No,No,,No
+73,Young,LHA,Pre,2,,,,No,Yes,Yes,
+74,Young,LHA,Pre,4,,,,Yes,Yes,No,
+75,Young,LHA,Pre,3,,,,No,Yes,No,
+76,Young,LHA,Pre,2,,,,No,yes,No,
+77,Young,LHA,Pre,1,,,,No,No,No,
+78,Senior,LHA,Pre,2,Yes,Yes,No,,,,
+79,Senior,LHA,Pre,1,No,Yes,Yes,,,,
+80,Senior,LHA,Pre,1,,,No,,,,
+81,Senior,LHA,Pre,5,Yes,No,Yes,,,,
+82,Senior,LHA,Pre,1,No,Yes,,,,,
+83,Senior,LHA,Pre,1,No,No,No,,,,
+84,Senior,LHA,Pre,1,No,No,No,,,,
+85,Young,LHA,Post,1,,,,No,No,,No
+86,Young,LHA,Post,2,,,,No,No,,No
+87,Young,LHA,Post,1,,,,No,No,,No
+88,Young,LHA,Post,4,,,,No,No,,No
+89,Young,LHA,Post,2,,,,No,No,,No
+90,Senior,LHA,Post,1,No,No,Yes,,,,
+91,Senior,LHA,Post,1,No,No,No,,,,
+92,Senior,LHA,Post,1,No,No,No,,,,
+93,Senior,LHA,Post,2,Yes,No,No,,,,
+94,Young,Our Homes,Pre,3,,,,Yes,Yes,,
+95,Young,Our Homes,Pre,1,,,,No,No,No,
+96,Young,Our Homes,Pre,4,,,,Yes,No,No,
+97,Young,Our Homes,Pre,2,,,,Yes,Yes,No,
+98,Young,Our Homes,Pre,3,,,,Yes,No,No,
+99,Young,Our Homes,Pre,3,,,,Yes,Yes,Yes,
+100,Senior,Our Homes,Pre,2,No,No,No,,,,
+101,Young,Our Homes,Post,1,,,,No,No,,No
+102,Young,Our Homes,Post,4,,,,No,Yes,,Yes
+103,Young,Our Homes,Post,2,,,,Yes,No,,Yes
+104,Young,Our Homes,Post,2,,,,No,Yes,,No
+105,Young,Our Homes,Post,1,,,,No,No,,No
+106,Young,Our Homes,Post,1,,,,Yes,No,,No
+107,Senior,Our Homes,Post,1,No,No,No,,,,
+108,Senior,Our Homes,Post,1,No,No,No,,,,
+109,Senior,Our Homes,Post,1,No,No,No,,,,
+110,Senior,Our Homes,Post,3,No,No,No,,,,
+111,Senior,Our Homes,Post,1,Yes,Yes,Yes,,,,
+112,Senior,Our Homes,Post,1,No,No,No,,,,
+113,Senior,Our Homes,Post,1,No,No,No,,,,
+114,Senior,Our Homes,Post,1,No,No,No,,,,
+115,Senior,Our Homes,Post,1,No,No,No,,,,
+116,Senior,Our Homes,Post,1,No,No,No,,,,
+117,Senior,Our Homes,Post,5,No,No,No,,,,
+118,Young,Strands of Widom,Pre,1,Yes,No,No,,,,
+119,Young,Strands of Widom,Pre,1,Yes,,,,,,
+120,Young,Strands of Widom,Pre,4,Yes,Yes,Yes,,,,
+121,Young,Strands of Widom,Pre,3,Yes,No,No,,,,
+122,Young,Strands of Widom,Pre,4,Yes,No,No,,,,
+123,Young,Strands of Widom,Pre,,Yes,No,No,,,,
+124,Young,Strands of Widom,Pre,1,No,No,No,,,,
+125,Young,Strands of Widom,Pre,3,Yes,Yes,Yes,,,,
+126,Young,Strands of Widom,Pre,,No,Yes,Yes,,,,
+127,Young,Strands of Widom,Pre,3,Yes,No,No,,,,
+128,Young,Strands of Widom,Pre,2,Yes,Yes,Yes,,,,
+129,Young,Strands of Widom,Pre,3,Yes,No,Yes,,,,
+130,Young,Strands of Widom,Pre,1,Yes,No,Yes,,,,
+131,Young,Strands of Widom,Pre,1,No,Yes,Yes,,,,
+132,Young,Strands of Widom,Pre,3,Yes,No,No,,,,
+133,Senior,Strands of Widom,Pre,1,No,No,No,,,,
+134,Senior,Strands of Widom,Pre,4,No,No,No,,,,
+135,Senior,Strands of Widom,Pre,1,No,No,Yes,,,,
+136,Senior,Strands of Widom,Pre,1,Yes,No,No,,,,
+137,Senior,Strands of Widom,Pre,1,Yes,Yes,No,,,,
+138,Senior,Strands of Widom,Pre,1,No,No,No,,,,
+139,Senior,Strands of Widom,Pre,2,No,No,No,,,,
+140,Senior,Strands of Widom,Pre,1,No,No,No,,,,
+141,Senior,Strands of Widom,Pre,3,No,No,No,,,,
+142,Senior,Strands of Widom,Pre,3,Yes,Yes,No,,,,
+143,Senior,Strands of Widom,Pre,2,Yes,Yes,,,,,
+144,Senior,Strands of Widom,Pre,3,No,Yes,Yes,,,,
+145,Young,Strands of Widom,Post,3,,,,No,No,,No
+146,Young,Strands of Widom,Post,,,,,No,No,,No
+147,Young,Strands of Widom,Post,1,,,,No,No,,No
+148,Young,Strands of Widom,Post,1,,,,No,No,,No
+149,Young,Strands of Widom,Post,1,,,,No,No,,No
+150,Young,Strands of Widom,Post,2,,,,Yes,No,,No
+151,Young,Strands of Widom,Post,1,,,,No,No,,No
+152,Young,Strands of Widom,Post,1,,,,No,No,,No
+153,Young,Strands of Widom,Post,2,,,,Yes,Yes,,No
+154,Young,Strands of Widom,Post,2,,,,No,No,,No
+155,Young,Strands of Widom,Post,4,,,,Yes,No,,Yes
+156,Senior,Strands of Widom,Post,2,Yes,No,No,,,,
+157,Senior,Strands of Widom,Post,1,No,No,No,,,,
+158,Senior,Strands of Widom,Post,1,No,No,No,,,,
+159,Senior,Strands of Widom,Post,1,No,No,No,,,,
+160,Senior,Strands of Widom,Post,1,No,No,No,,,,
+161,Senior,Strands of Widom,Post,1,No,No,No,,,,
+162,Senior,Strands of Widom,Post,2,,,,,,,
+163,Senior,Strands of Widom,Post,1,No,No,No,,,,
+164,Senior,Strands of Widom,Post,2,No,No,No,,,,
+165,Senior,Strands of Widom,Post,1,No,No,No,,,,
+166,Senior,Strands of Widom,Post,1.5,No,No,No,,,,
+,,,,,,,,,,,
+Art on Sedgewick,,,,,,,,,,,

@@ -1,0 +1,72 @@
+---
+title: "Binary Data Analysis"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+---
+
+```{r}
+library(tidyverse)
+binarydata <- read.csv("/home/zzeng1/Innovation80/Innovation80/Binary Data - Sheet1.csv")
+```
+
+```{r}
+colnames(binarydata)
+
+
+# Convert columns to factors
+binarydata$Participant.Type <- as.factor(binarydata$Participant.Type)
+binarydata$Perspective.Understanding <- as.factor(binarydata$Perspective.Understanding)
+
+# Remove empty values in Participant.Type
+binarydata <- binarydata %>% filter(Participant.Type != "")
+
+# Exclude programs without any data for Perspective Understanding
+binarydata <- binarydata %>% group_by(Program.Name) %>% filter(any(!is.na(Perspective.Understanding))) %>% ungroup()
+
+# Ensure factors are updated after removal
+binarydata$Participant.Type <- factor(binarydata$Participant.Type)
+# Create a contingency table
+table_data <- table(binarydata$Participant.Type, binarydata$Perspective.Understanding)
+
+# Run the Chi-square test
+chi_square_result <- chisq.test(table_data)
+print(chi_square_result)
+
+# Check expected counts
+chi_square_result$expected
+
+```
+```{r}
+# Convert contingency table to data frame
+data_table <- as.data.frame(table_data)
+colnames(data_table) <- c("Participant_Type", "Perspective_Understanding", "Count")
+
+# Calculate total counts for each participant type
+total_counts <- binarydata %>% group_by(Participant.Type) %>% summarise(Total = n())
+print(total_counts)
+
+# Plot
+plot <- ggplot(data_table, aes(x = Perspective_Understanding, y = Count, fill = Participant_Type)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Perspective Understanding by Participant Type",
+       x = "Perspective Understanding",
+       y = "Count") +
+  theme_minimal() +
+  scale_fill_manual(values = c("blue", "orange"))
+
+# Check unique values
+unique(data_table$Participant_Type)
+
+# Print plot
+print(plot)
+
+
+
+```
+
+The results of the chi-square test indicate a significant association between participant type (senior vs. young) and responses to the survey item "unable to understand my perspective" (χ²(2) = 103.32, p < .001). The visualization suggests that young participants were more likely to select "No," indicating that they did not perceive others as unable to understand their perspective, whereas seniors had a more balanced distribution between "Yes" and "No" responses. Given the strong statistical significance, the differences observed are unlikely due to random chance and suggest meaningful distinctions in how seniors and young participants perceive perspective-taking in interactions. Further analysis, such as standardized residuals, could clarify which response categories contribute most to the observed association.
