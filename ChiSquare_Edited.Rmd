@@ -21,7 +21,7 @@ df[df == ""] <- NA
 # Remove rows with missing values in "Perspective Understanding"
 df_cleaned <- df %>% drop_na(Perspective.Understanding)
 
-df_cleaned <- df_cleaned |> filter(Program.Name != "Strands of Widom")
+df_cleaned <- df_cleaned |> filter(Program.Name == "Strands of Widom")
 
 # Standardize the text format for categorical variables
 df_cleaned$Perspective.Understanding <- tolower(trimws(df_cleaned$Perspective.Understanding))
@@ -70,7 +70,7 @@ interaction_data[interaction_data == ""] <- NA
 interaction_data <- interaction_data %>% drop_na(Disinterest.in.Interaction)
 
 # Exclude data from "Strands of Wisdom"
-interaction_data <- interaction_data %>% filter(Program.Name != "Strands of Widom")
+interaction_data <- interaction_data %>% filter(Program.Name == "Strands of Widom")
 # Create a contingency table
 contingency_table <- table(interaction_data$Survey.Type, interaction_data$Disinterest.in.Interaction)
 
@@ -90,12 +90,13 @@ summary_data <- interaction_data %>%
   summarise(Count = n(), .groups = "drop") %>%
   mutate(SE = sqrt(Count))  # Approximate standard error for count data
 
+
 # Create the bar plot with custom colors
 ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Disinterest.in.Interaction)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
-                position = position_dodge(width = 0.9), width = 0.2) +  # Adds vertical error bars
-  scale_fill_manual(values = c("yes" = "#E69F00", "no" = "#56B4E9")) +  # Change colors
+                position = position_dodge(width = 0.9), width = 0.2) +  
+  scale_fill_manual(values = c("Yes" = "#E69F00", "No" = "#56B4E9")) +  
   labs(title = "Disinterest in Interaction by Survey Type",
        x = "Survey Type (Pre/Post)",
        y = "Count ± SE",
