@@ -8,7 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+## Perspective Understanding ##
 ```{r}
 library(tidyverse)
 df <- read.csv("/home/zzeng1/Innovation80/Innovation80/Perspective - Sheet1.csv")
@@ -21,6 +21,7 @@ df[df == ""] <- NA
 # Remove rows with missing values in "Perspective Understanding"
 df_cleaned <- df %>% drop_na(Perspective.Understanding)
 
+df_cleaned <- df_cleaned |> filter(Program.Name != "Strands of Widom")
 
 # Standardize the text format for categorical variables
 df_cleaned$Perspective.Understanding <- tolower(trimws(df_cleaned$Perspective.Understanding))
@@ -58,4 +59,47 @@ ggplot(summary_df, aes(x = Survey.Type, y = Count, fill = Perspective.Understand
 
 ```
 A Pearson’s chi-square test with Yates’ continuity correction was conducted to examine the relationship between survey time point (Pre vs. Post) and the perception that the other person had difficulty understanding. The results indicated a statistically significant association between survey time point and perceived difficulty in understanding, X²(1, N = 85) = 4.92, p = .027. The contingency table showed that in the Pre survey condition, 13 participants reported that the other person had difficulty understanding them, while 36 did not. In contrast, in the Post survey condition, only 2 participants reported difficulty, while 34 did not. These results suggest that after the intervention (Post survey), participants were significantly less likely to perceive that the other person had difficulty understanding them compared to the Pre survey condition, indicating a possible improvement in mutual understanding.
+
+## Distinterest in Interaction ##
+```{r}
+# Read the CSV file
+interaction_data <- read.csv("/home/zzeng1/Innovation80/Innovation80/Interaction - Sheet1.csv",stringsAsFactors = FALSE)
+# Convert empty strings to NA and remove them
+interaction_data[interaction_data == ""] <- NA
+
+interaction_data <- interaction_data %>% drop_na(Disinterest.in.Interaction)
+
+# Exclude data from "Strands of Wisdom"
+interaction_data <- interaction_data %>% filter(Program.Name != "Strands of Widom")
+# Create a contingency table
+contingency_table <- table(interaction_data$Survey.Type, interaction_data$Disinterest.in.Interaction)
+
+# Perform Chi-Square Test
+chi_test <- chisq.test(contingency_table)
+
+# Print results
+print(chi_test)
+
+# Display contingency table
+print(contingency_table)
+```
+```{r}
+# Create a summary table with proportions and standard error (SE)
+summary_data <- interaction_data %>%
+  group_by(Survey.Type, Disinterest.in.Interaction) %>%
+  summarise(Count = n(), .groups = "drop") %>%
+  mutate(SE = sqrt(Count))  # Approximate standard error for count data
+
+# Create the bar plot with custom colors
+ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Disinterest.in.Interaction)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
+                position = position_dodge(width = 0.9), width = 0.2) +  # Adds vertical error bars
+  scale_fill_manual(values = c("yes" = "#E69F00", "no" = "#56B4E9")) +  # Change colors
+  labs(title = "Disinterest in Interaction by Survey Type",
+       x = "Survey Type (Pre/Post)",
+       y = "Count ± SE",
+       fill = "Disinterest in Interaction") +
+  theme_minimal()
+```
 
