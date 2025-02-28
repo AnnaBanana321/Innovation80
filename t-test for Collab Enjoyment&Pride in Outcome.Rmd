@@ -17,8 +17,6 @@ scale_data <- read.csv("/home/zzeng1/Innovation80/Innovation80/Scale Data - Shee
 ```
 
 
-
-
 ```{r}
 # Rename the columns
 colnames(scale_data) <- c("Participant_ID", "Participant_Type", "Program_Name", 
