@@ -107,4 +107,89 @@ ggplot(scale_data, aes(x = Participant_Type, y = `pride_in_outcome`, fill = Part
   theme_minimal()
 
 ```
+```{r}
+# Convert empty strings to NA
+scale_data <- scale_data %>%
+  mutate(survey_type = na_if(survey_type, ""),
+         Participant_Type = na_if(Participant_Type, ""))
+
+# Remove rows with NA values in survey_type or Participant_Type
+cleaned_data <- scale_data %>%
+  filter(!is.na(survey_type), !is.na(Participant_Type))
+
+# Ensure survey_type and Participant_Type are factors before using droplevels()
+cleaned_data$survey_type <- factor(cleaned_data$survey_type)
+cleaned_data$Participant_Type <- factor(cleaned_data$Participant_Type)
+
+# Drop unused factor levels
+cleaned_data$survey_type <- droplevels(cleaned_data$survey_type)
+cleaned_data$Participant_Type <- droplevels(cleaned_data$Participant_Type)
+
+
+
+
+```
+
+```{r}
+# Compute means and standard errors by Survey Type
+summary_stats <- cleaned_data %>%
+  group_by(survey_type) %>%
+  summarise(
+    mean_collab_enjoyment = mean(collab_enjoyment, na.rm = TRUE),
+    se_collab_enjoyment = sd(collab_enjoyment, na.rm = TRUE) / sqrt(n()),
+    mean_pride_outcome = mean(pride_in_outcome, na.rm = TRUE),
+    se_pride_outcome = sd(pride_in_outcome, na.rm = TRUE) / sqrt(n())
+  )
+
+# Compute means and standard errors by Participant Type
+summary_participant <- cleaned_data %>%
+  group_by(Participant_Type) %>%
+  summarise(
+    mean_collab_enjoyment = mean(collab_enjoyment, na.rm = TRUE),
+    se_collab_enjoyment = sd(collab_enjoyment, na.rm = TRUE) / sqrt(n()),
+    mean_pride_outcome = mean(pride_in_outcome, na.rm = TRUE),
+    se_pride_outcome = sd(pride_in_outcome, na.rm = TRUE) / sqrt(n())
+  )
+
+# Bar Plot for Collab Enjoyment by Survey Type
+ggplot(summary_stats, aes(x = survey_type, y = mean_collab_enjoyment, fill = survey_type)) +
+  geom_bar(stat = "identity", color = "black", alpha = 0.7) +
+  geom_errorbar(aes(ymin = mean_collab_enjoyment - se_collab_enjoyment, 
+                    ymax = mean_collab_enjoyment + se_collab_enjoyment), 
+                width = 0.2) +
+  labs(title = "Collab Enjoyment by Survey Type",
+       x = "Survey Type", y = "Mean Collab Enjoyment") +
+  theme_minimal()
+
+# Bar Plot for Pride in Outcome by Survey Type
+ggplot(summary_stats, aes(x = survey_type, y = mean_pride_outcome, fill = survey_type)) +
+  geom_bar(stat = "identity", color = "black", alpha = 0.7) +
+  geom_errorbar(aes(ymin = mean_pride_outcome - se_pride_outcome, 
+                    ymax = mean_pride_outcome + se_pride_outcome), 
+                width = 0.2) +
+  labs(title = "Pride in Outcome by Survey Type",
+       x = "Survey Type", y = "Mean Pride in Outcome") +
+  theme_minimal()
+
+# Bar Plot for Collab Enjoyment by Participant Type
+ggplot(summary_participant, aes(x = Participant_Type, y = mean_collab_enjoyment, fill = Participant_Type)) +
+  geom_bar(stat = "identity", color = "black", alpha = 0.7) +
+  geom_errorbar(aes(ymin = mean_collab_enjoyment - se_collab_enjoyment, 
+                    ymax = mean_collab_enjoyment + se_collab_enjoyment), 
+                width = 0.2) +
+  labs(title = "Collab Enjoyment by Participant Type",
+       x = "Participant Type", y = "Mean Collab Enjoyment") +
+  theme_minimal()
+
+# Bar Plot for Pride in Outcome by Participant Type
+ggplot(summary_participant, aes(x = Participant_Type, y = mean_pride_outcome, fill = Participant_Type)) +
+  geom_bar(stat = "identity", color = "black", alpha = 0.7) +
+  geom_errorbar(aes(ymin = mean_pride_outcome - se_pride_outcome, 
+                    ymax = mean_pride_outcome + se_pride_outcome), 
+                width = 0.2) +
+  labs(title = "Pride in Outcome by Participant Type",
+       x = "Participant Type", y = "Mean Pride in Outcome") +
+  theme_minimal()
+
+```
 
