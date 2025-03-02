@@ -77,17 +77,24 @@ The results of the independent t-tests comparing "Collab Enjoyment" and "Pride i
 
 
 ```{r}
+# Relevel the survey_type so that "Pre" comes first
+scale_data$survey_type <- factor(scale_data$survey_type, levels = c("Pre", "Post"))
+
 # Boxplot comparing Collab Enjoyment for Pre and Post survey types
 library(ggplot2)
 ggplot(scale_data, aes(x = survey_type, y = `collab_enjoyment`, fill = survey_type)) +
   geom_boxplot() +
-  labs(title = "Boxplot of Collab Enjoyment by Survey Type", x = "Survey Type", y = "Collab Enjoyment") +
+  labs(title = "Boxplot of Collab Enjoyment by Survey Type", 
+       x = "Survey Type", 
+       y = "Collab Enjoyment") +
   theme_minimal()
 
 # Boxplot comparing Pride in Outcome for Pre and Post survey types
 ggplot(scale_data, aes(x = survey_type, y = `pride_in_outcome`, fill = survey_type)) +
   geom_boxplot() +
-  labs(title = "Boxplot of Pride in Outcome by Survey Type", x = "Survey Type", y = "Pride in Outcome") +
+  labs(title = "Boxplot of Pride in Outcome by Survey Type", 
+       x = "Survey Type", 
+       y = "Pride in Outcome") +
   theme_minimal()
 
 ```
@@ -106,10 +113,18 @@ ggplot(scale_data, aes(x = Participant_Type, y = `pride_in_outcome`, fill = Part
 
 ```
 ```{r}
-# Convert empty strings to NA
+
+# Convert empty strings to NA for factors (by first converting them to character)
 scale_data <- scale_data %>%
-  mutate(survey_type = na_if(survey_type, ""),
-         Participant_Type = na_if(Participant_Type, ""))
+  mutate(
+    survey_type = na_if(as.character(survey_type), ""),
+    Participant_Type = na_if(as.character(Participant_Type), "")
+  )
+
+# Convert back to factors if necessary
+scale_data$survey_type <- factor(scale_data$survey_type)
+scale_data$Participant_Type <- factor(scale_data$Participant_Type)
+
 
 # Remove rows with NA values in survey_type or Participant_Type
 cleaned_data <- scale_data %>%
@@ -129,6 +144,10 @@ cleaned_data$Participant_Type <- droplevels(cleaned_data$Participant_Type)
 ```
 
 ```{r}
+# Relevel survey_type and Participant_Type so that the desired order is applied
+cleaned_data$survey_type <- factor(cleaned_data$survey_type, levels = c("Pre", "Post"))
+cleaned_data$Participant_Type <- factor(cleaned_data$Participant_Type, levels = c("Young", "Senior"))
+
 # Compute means and standard errors by Survey Type
 summary_stats <- cleaned_data %>%
   group_by(survey_type) %>%
