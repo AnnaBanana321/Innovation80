@@ -40,6 +40,9 @@ print(contingency_table)
 ```
 
 ```{r}
+# Relevel Survey.Type so "Pre" appears before "Post"
+df_cleaned$Survey.Type <- factor(df_cleaned$Survey.Type, levels = c("Pre", "Post"))
+
 # Create a summary table with proportions and standard error (SE)
 summary_df <- df_cleaned %>%
   group_by(Survey.Type, Perspective.Understanding) %>%
@@ -56,6 +59,7 @@ ggplot(summary_df, aes(x = Survey.Type, y = Count, fill = Perspective.Understand
        y = "Count ± SE",
        fill = "Perspective Understanding") +
   theme_minimal()
+
 
 ```
 
@@ -87,12 +91,14 @@ A Pearson’s chi-square test with Yates’ continuity correction was conducted 
 
 The significant result suggests that perceptions of younger individuals' disinterest in engaging with older individuals changed between the Pre and Post survey conditions. Specifically, participants were significantly less likely to perceive younger individuals as uninterested in getting to know older people in the Post survey compared to the Pre survey. This finding may indicate a positive shift in intergenerational engagement following the intervention. However, further research is needed to determine the extent and causes of this shift.
 ```{r}
+# Relevel Survey.Type so "Pre" appears before "Post"
+interaction_data$Survey.Type <- factor(interaction_data$Survey.Type, levels = c("Pre", "Post"))
+
 # Create a summary table with proportions and standard error (SE)
 summary_data <- interaction_data %>%
   group_by(Survey.Type, Disinterest.in.Interaction) %>%
   summarise(Count = n(), .groups = "drop") %>%
   mutate(SE = sqrt(Count))  # Approximate standard error for count data
-
 
 # Create the bar plot with custom colors
 ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Disinterest.in.Interaction)) +
@@ -105,6 +111,7 @@ ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Disinterest.in.Inter
        y = "Count ± SE",
        fill = "Disinterest in Interaction") +
   theme_minimal()
+
 ```
 ```{r}
 # Read the dataset
@@ -144,6 +151,9 @@ if (nrow(contingency_table) == 0 | ncol(contingency_table) == 0) {
 }
 ```
 ```{r}
+# Relevel Survey.Type so "Pre" appears before "Post"
+inflexibility$Survey.Type <- factor(inflexibility$Survey.Type, levels = c("Pre", "Post"))
+
 # Calculate counts for each category
 summary_data <- inflexibility %>%
   group_by(Survey.Type, Inflexibility.Perception) %>%
@@ -165,6 +175,7 @@ ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Inflexibility.Percep
        fill = "Inflexibility Perception") +
   theme_minimal() +
   theme(text = element_text(size = 14))
+
 ```
 ```{r}
 library(survey)  # Load the package
@@ -271,6 +282,9 @@ print(chi_test)
 ```
 
 ```{r}
+# Relevel Survey.Type so "Pre" appears before "Post"
+understanding_data$Survey.Type <- factor(understanding_data$Survey.Type, levels = c("Pre", "Post"))
+
 # Summarize counts for each group
 summary_data <- understanding_data %>%
   group_by(Survey.Type, Understanding) %>%
@@ -296,8 +310,6 @@ ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Understanding)) +
   theme_minimal() +
   theme(text = element_text(size = 14))
 
-```
-```{r}
 
 ```
 ```{r}
@@ -320,6 +332,36 @@ print(chi_test)
 
 ```
 ```{r}
+# Convert empty strings to NA and remove them
+disinterest_data[disinterest_data == ""] <- NA
+disinterest_data <- disinterest_data %>% drop_na(Disinterest.in.Interaction)
+
+# Relevel Participant.Type so "Senior" appears before "Young"
+disinterest_data$Participant.Type <- factor(disinterest_data$Participant.Type, levels = c("Young", "Senior"))
+
+# Create a summary table with counts and standard error (SE)
+summary_data <- disinterest_data %>%
+  group_by(Participant.Type, Disinterest.in.Interaction) %>%
+  summarise(Count = n(), .groups = "drop") %>%
+  mutate(SE = sqrt(Count))  # Approximate standard error for count data
+
+# Create the bar plot with error bars
+ggplot(summary_data, aes(x = Participant.Type, y = Count, fill = Disinterest.in.Interaction)) +
+  geom_bar(stat = "identity", position = position_dodge(), width = 0.6) +
+  geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
+                width = 0.2, position = position_dodge(0.6)) +
+  labs(title = "Disinterest in Interaction by Participant Type",
+       x = "Participant Type",
+       y = "Count ± SE",
+       fill = "Disinterest in Interaction") +
+  theme_minimal() +
+  theme(text = element_text(size = 14))
+
+
+
+```
+
+```{r}
 
 # Read the dataset
 perspective_data <- read.csv("/home/zzeng1/Innovation80/Innovation80/Widom_Perspective - Sheet1.csv", stringsAsFactors = FALSE)
@@ -330,7 +372,7 @@ perspective_data <- perspective_data %>% drop_na(Perspective.Understanding)
 
 # Create a contingency table comparing Pre vs Post
 contingency_table <- table(perspective_data$Survey.Type, perspective_data$Perspective.Understanding)
-
+print(contingency_table)
 # Run chi-square test
 chi_test <- chisq.test(contingency_table)
 
@@ -338,5 +380,33 @@ chi_test <- chisq.test(contingency_table)
 print(chi_test)
 
 ```
+
+```{r}
+# Convert empty strings to NA and remove them
+perspective_data[perspective_data == ""] <- NA
+perspective_data <- perspective_data %>% drop_na(Perspective.Understanding)
+
+# Relevel Survey.Type so "Pre" appears before "Post"
+perspective_data$Survey.Type <- factor(perspective_data$Survey.Type, levels = c("Pre", "Post"))
+
+# Create a summary table with counts and standard error (SE)
+summary_data <- perspective_data %>%
+  group_by(Survey.Type, Perspective.Understanding) %>%
+  summarise(Count = n(), .groups = "drop") %>%
+  mutate(SE = sqrt(Count))  # Approximate standard error for count data
+
+# Create the bar plot with error bars
+ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Perspective.Understanding)) +
+  geom_bar(stat = "identity", position = position_dodge(), width = 0.6) +
+  geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
+                width = 0.2, position = position_dodge(0.6)) +
+  labs(title = "Perspective Understanding by Survey Type",
+       x = "Survey Type (Pre/Post)",
+       y = "Count ± SE",
+       fill = "Perspective Understanding") +
+  theme_minimal() +
+  theme(text = element_text(size = 14))
+```
+
 
 
