@@ -49,16 +49,18 @@ summary_df <- df_cleaned %>%
   summarise(Count = n(), .groups = "drop") %>%
   mutate(SE = sqrt(Count))  # Approximate standard error for count data
 
-# Create the bar plot with vertical error bars
+# Create the bar plot with vertical error bars and explanation note
 ggplot(summary_df, aes(x = Survey.Type, y = Count, fill = Perspective.Understanding)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
                 position = position_dodge(width = 0.9), width = 0.2) +  # Adds vertical error bars
   labs(title = "Perspective Understanding by Survey Type",
+       subtitle = "'Yes' means the participant agrees that younger individuals may not be able to understand their perspective; 'No' means they disagree.",
        x = "Survey Type (Pre/Post)",
        y = "Count ± SE",
        fill = "Perspective Understanding") +
   theme_minimal()
+
 
 
 ```
@@ -100,17 +102,19 @@ summary_data <- interaction_data %>%
   summarise(Count = n(), .groups = "drop") %>%
   mutate(SE = sqrt(Count))  # Approximate standard error for count data
 
-# Create the bar plot with custom colors
+# Create the bar plot with custom colors and explanation note
 ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Disinterest.in.Interaction)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
                 position = position_dodge(width = 0.9), width = 0.2) +  
   scale_fill_manual(values = c("Yes" = "#E69F00", "No" = "#56B4E9")) +  
   labs(title = "Disinterest in Interaction by Survey Type",
+       subtitle = "'Yes' means the participant agrees that younger individuals might be uninterested in interactions; 'No' means they disagree.",
        x = "Survey Type (Pre/Post)",
        y = "Count ± SE",
        fill = "Disinterest in Interaction") +
   theme_minimal()
+
 
 ```
 ```{r}
@@ -164,91 +168,18 @@ summary_data <- summary_data %>%
   group_by(Survey.Type) %>%
   mutate(Standard_Error = sqrt(Count))  # Approximation assuming Poisson distribution
 
-# Plot the bar chart with error bars
+# Plot the bar chart with error bars and explanation note
 ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Inflexibility.Perception)) +
   geom_bar(stat = "identity", position = position_dodge(), width = 0.6) +
   geom_errorbar(aes(ymin = Count - Standard_Error, ymax = Count + Standard_Error), 
                 width = 0.2, position = position_dodge(0.6)) +
   labs(title = "Inflexibility Perception (Pre vs Post)",
+       subtitle = "'Yes' means agreeing that older individuals may be inflexible; 'No' means disagreement.",
        x = "Survey Type",
        y = "Count",
        fill = "Inflexibility Perception") +
   theme_minimal() +
   theme(text = element_text(size = 14))
-
-```
-```{r}
-library(survey)  # Load the package
-```
-```{r}
-
-# Calculate count of each group
-group_counts <- inflexibility %>%
-  group_by(Survey.Type, Inflexibility.Perception) %>%
-  summarise(Count = n(), .groups = "drop")
-
-# Calculate total sample size
-total_count <- sum(group_counts$Count)
-
-# Assign weight as the proportion of each group
-group_counts <- group_counts %>%
-  mutate(Weight = Count / total_count)
-
-# Merge weight back into the original dataset (only keep relevant columns)
-inflexibility <- inflexibility %>%
-  select(Participant.Type, Program.Name, Survey.Type, Inflexibility.Perception) %>%
-  left_join(group_counts, by = c("Survey.Type", "Inflexibility.Perception"))
-
-# Debug: Print column names to check merge success
-print(colnames(inflexibility))
-
-# Ensure only one weight column exists
-if ("Weight.x" %in% colnames(inflexibility)) {
-  inflexibility <- inflexibility %>% rename(Weight = Weight.x)
-} else if ("Weight.y" %in% colnames(inflexibility)) {
-  inflexibility <- inflexibility %>% rename(Weight = Weight.y)
-}
-
-# Drop any extra columns from previous merges
-inflexibility <- inflexibility %>% select(Participant.Type, Survey.Type, Inflexibility.Perception, Weight)
-
-# Debug: Check dataset structure after fixing weight
-print(head(inflexibility))
-
-# Ensure 'Weight' is numeric
-inflexibility$Weight <- as.numeric(inflexibility$Weight)
-
-# Define survey design for weighting
-design <- svydesign(ids = ~1, data = inflexibility, weights = ~Weight)
-
-# Perform weighted chi-square test
-weighted_chi_test <- svychisq(~Survey.Type + Inflexibility.Perception, design)
-
-# Print results
-print(weighted_chi_test)
-
-```
-```{r}
-# Count "Yes" responses in each Survey.Type
-yes_counts <- inflexibility %>%
-  filter(Inflexibility.Perception == "Yes") %>%
-  group_by(Survey.Type) %>%
-  summarise(Yes_Count = sum(Weight), .groups = "drop")
-
-# Count total responses in each Survey.Type
-total_counts <- inflexibility %>%
-  group_by(Survey.Type) %>%
-  summarise(Total_Count = sum(Weight), .groups = "drop")
-
-# Ensure the data is in the correct format
-print(yes_counts)
-print(total_counts)
-
-# Run proportion test
-prop_test <- prop.test(yes_counts$Yes_Count, total_counts$Total_Count)
-
-# Print results
-print(prop_test)
 
 ```
 ```{r}
@@ -298,20 +229,21 @@ summary_data <- summary_data %>%
 # Verify that "yes" is gone before plotting
 print(unique(summary_data$Understanding))
 
-# Plot bar chart with error bars
+# Plot bar chart with error bars and explanation note
 ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Understanding)) +
   geom_bar(stat = "identity", position = position_dodge(), width = 0.6) +
   geom_errorbar(aes(ymin = Count - Standard_Error, ymax = Count + Standard_Error), 
                 width = 0.2, position = position_dodge(0.6)) +
   labs(title = "Understanding (Pre vs Post) Among Young Participants",
+       subtitle = "'Yes' means agreeing that older individuals may have difficulty understanding them; 'No' means disagreement.",
        x = "Survey Type",
        y = "Count",
        fill = "Understanding") +
   theme_minimal() +
   theme(text = element_text(size = 14))
 
-
 ```
+
 ```{r}
 
 # Read the dataset
@@ -331,6 +263,7 @@ chi_test <- chisq.test(contingency_table)
 print(chi_test)
 
 ```
+
 ```{r}
 # Convert empty strings to NA and remove them
 disinterest_data[disinterest_data == ""] <- NA
@@ -345,12 +278,13 @@ summary_data <- disinterest_data %>%
   summarise(Count = n(), .groups = "drop") %>%
   mutate(SE = sqrt(Count))  # Approximate standard error for count data
 
-# Create the bar plot with error bars
+# Create the bar plot with error bars and explanation note
 ggplot(summary_data, aes(x = Participant.Type, y = Count, fill = Disinterest.in.Interaction)) +
   geom_bar(stat = "identity", position = position_dodge(), width = 0.6) +
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
                 width = 0.2, position = position_dodge(0.6)) +
-  labs(title = "Disinterest in Interaction by Participant Type",
+  labs(title = "Disinterest in Interaction by Participant Type (Strands of Wisdom)",
+       subtitle = "'Yes' means agreeing that younger/older individuals might be uninterested in interactions; 'No' means disagreement.",
        x = "Participant Type",
        y = "Count ± SE",
        fill = "Disinterest in Interaction") +
@@ -395,17 +329,19 @@ summary_data <- perspective_data %>%
   summarise(Count = n(), .groups = "drop") %>%
   mutate(SE = sqrt(Count))  # Approximate standard error for count data
 
-# Create the bar plot with error bars
+# Create the bar plot with error bars and explanation note
 ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Perspective.Understanding)) +
   geom_bar(stat = "identity", position = position_dodge(), width = 0.6) +
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
                 width = 0.2, position = position_dodge(0.6)) +
-  labs(title = "Perspective Understanding by Survey Type",
+  labs(title = "Perspective Understanding by Survey Type (Strands of Wisdom)",
+       subtitle = "'Yes' means agreeing that younger/older individuals might struggle to understand different perspectives; 'No' means disagreement.",
        x = "Survey Type (Pre/Post)",
        y = "Count ± SE",
        fill = "Perspective Understanding") +
   theme_minimal() +
   theme(text = element_text(size = 14))
+
 ```
 
 
