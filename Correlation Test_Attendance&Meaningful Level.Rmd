@@ -52,6 +52,7 @@ print(chi_sq_test)
 
 
 ```
+
 ```{r}
 # Stacked Bar Plot for Attendance and Meaning Level
 library(ggplot2)
