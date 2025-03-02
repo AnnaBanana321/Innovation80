@@ -27,27 +27,53 @@ class(scale_data_1$Meaning.Level)
 scale_data_1$Attendance <- as.numeric(scale_data_1$Attendance)
 scale_data_1$Meaning.Level <- as.numeric(scale_data_1$Meaning.Level)
 
-# Perform the correlation test again
-correlation_test <- cor.test(scale_data_1$Attendance, scale_data_1$Meaning.Level, method = "pearson")
-
-# Print the results of the correlation test
-correlation_test
-
 ```
 
-The Pearson correlation test between "Attendance" and "Meaning.Level" yielded a correlation coefficient of -0.0062, which is very close to zero, suggesting an almost non-existent linear relationship between the two variables. The test statistic was t = -0.052, and the p-value was 0.9587, which is much higher than the commonly used threshold of 0.05. This indicates that the observed correlation is not statistically significant. Additionally, the 95% confidence interval for the correlation coefficient ranges from -0.2375 to 0.2258, which includes zero, further supporting the conclusion that there is no meaningful relationship between "Attendance" and "Meaning.Level." Thus, we fail to reject the null hypothesis, and we conclude that there is no significant correlation between the two variables.
+
 
 ```{r}
-# Scatter plot to show the relationship between Attendance and meaning_level
-library(ggplot2)
-ggplot(scale_data_1, aes(x = Attendance, y = Meaning.Level)) +
-  geom_point() +  # Adds scatter plot points
-  geom_smooth(method = "lm", se = FALSE, color = "blue") + # Adds a linear regression line
-  labs(title = "Scatter Plot of Attendance vs. Meaning Level", 
-       x = "Attendance", 
-       y = "Meaning Level") +
-  theme_minimal()
+colnames(scale_data_1)
+# Convert blank values in Attendance and Meaning.Level to NA
+scale_data_1$Attendance[scale_data_1$Attendance == ""] <- NA
+scale_data_1$Meaning.Level[scale_data_1$Meaning.Level == ""] <- NA
+
+# Remove rows with NA values in Attendance or Meaning.Level
+cleaned_data <- scale_data_1[!is.na(scale_data_1$Attendance) & !is.na(scale_data_1$Meaning.Level), ]
+
+# Create the contingency table again
+contingency_table <- table(cleaned_data$Attendance, cleaned_data$Meaning.Level)
+
+# Check the contingency table
+print(contingency_table)
+
+# Run the Chi-Square test
+chi_sq_test <- chisq.test(contingency_table)
+print(chi_sq_test)
+
 
 ```
+```{r}
+# Stacked Bar Plot for Attendance and Meaning Level
+library(ggplot2)
+
+# Remove rows with NA values in Attendance or Meaning Level
+cleaned_data <- na.omit(scale_data_1[, c("Attendance", "Meaning.Level")])
+
+# Ensure Meaning Level is treated as a factor
+cleaned_data$Meaning.Level <- as.factor(cleaned_data$Meaning.Level)
+
+# Stacked Bar Plot to visualize the relationship between Attendance and Meaning Level
+ggplot(cleaned_data, aes(x = Attendance, fill = Meaning.Level)) +
+  geom_bar(position = "stack") +  # Stack the bars
+  labs(title = "Stacked Bar Plot of Attendance and Meaning Level", 
+       x = "Attendance", 
+       y = "Count") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set3")  # Use a color palette for better color differentiation
+
+
+```
+
+
 
 
