@@ -56,7 +56,8 @@ ggplot(summary_df, aes(x = Survey.Type, y = Count, fill = Perspective.Understand
                 position = position_dodge(width = 0.9), width = 0.2) +  # Adds vertical error bars
   scale_fill_manual(values = c("yes" = "#89CFF0", "no" = "#FF7F50")) +
   labs(title = "Perspective Understanding by Survey Type",
-       subtitle = "'Yes' means the participant agrees that younger individuals may not be able to understand their perspective; 'No' means they disagree.",
+       subtitle = "'Yes' means the participant agrees that younger individuals
+       may not be able to understand their perspective; 'No' means they disagree.",
        x = "Survey Type (Pre/Post)",
        y = "Count ± SE",
        fill = "Perspective Understanding") +
@@ -108,7 +109,8 @@ ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Disinterest.in.Inter
                 position = position_dodge(width = 0.9), width = 0.2) +  
   scale_fill_manual(values = c("Yes" = "#89CFF0", "No" = "#FF7F50")) +  
   labs(title = "Disinterest in Interaction by Survey Type",
-       subtitle = "'Yes' means the participant agrees that younger individuals might be uninterested in interactions; 'No' means they disagree.",
+       subtitle = "'Yes' means the participant agrees that younger individuals 
+       might be uninterested in interactions; 'No' means they disagree.",
        x = "Survey Type (Pre/Post)",
        y = "Count ± SE",
        fill = "Disinterest in Interaction") +
@@ -174,7 +176,8 @@ ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Inflexibility.Percep
                 width = 0.2, position = position_dodge(0.6)) +
   scale_fill_manual(values = c("Yes" = "#89CFF0", "No" = "#FF7F50")) +
   labs(title = "Inflexibility Perception (Pre vs Post)",
-       subtitle = "'Yes' means agreeing that older individuals may be inflexible; 'No' means disagreement.",
+       subtitle = "'Yes' means agreeing that older individuals 
+       may be inflexible; 'No' means disagreement.",
        x = "Survey Type",
        y = "Count",
        fill = "Inflexibility Perception") +
@@ -236,7 +239,8 @@ ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Understanding)) +
                 width = 0.2, position = position_dodge(0.6)) +
   scale_fill_manual(values = c("Yes" = "#89CFF0", "No" = "#FF7F50")) +
   labs(title = "Understanding (Pre vs Post) Among Young Participants",
-       subtitle = "'Yes' means agreeing that older individuals may have difficulty understanding them; 'No' means disagreement.",
+       subtitle = "'Yes' means agreeing that older individuals 
+       may have difficulty understanding them; 'No' means disagreement.",
        x = "Survey Type",
        y = "Count",
        fill = "Understanding") +
@@ -286,7 +290,8 @@ ggplot(summary_data, aes(x = Participant.Type, y = Count, fill = Disinterest.in.
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
                 width = 0.2, position = position_dodge(0.6)) +
   labs(title = "Disinterest in Interaction by Participant Type (Strands of Wisdom)",
-       subtitle = "'Yes' means agreeing that younger/older individuals might be uninterested in interactions; 'No' means disagreement.",
+       subtitle = "'Yes' means agreeing that younger/older
+       individuals might be uninterested in interactions; 'No' means disagreement.",
        x = "Participant Type",
        y = "Count ± SE",
        fill = "Disinterest in Interaction") +
@@ -338,7 +343,8 @@ ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Perspective.Understa
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
                 width = 0.2, position = position_dodge(0.6)) +
   labs(title = "Perspective Understanding by Survey Type (Strands of Wisdom)",
-       subtitle = "'Yes' means agreeing that younger/older individuals might struggle to understand different perspectives; 'No' means disagreement.",
+       subtitle = "'Yes' means agreeing that younger/older 
+       individuals might struggle to understand different perspectives; 'No' means disagreement.",
        x = "Survey Type (Pre/Post)",
        y = "Count ± SE",
        fill = "Perspective Understanding") +
