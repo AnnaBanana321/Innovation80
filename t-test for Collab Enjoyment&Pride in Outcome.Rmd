@@ -55,63 +55,10 @@ print(collab_enjoyment_test)
 pride_outcome_test <- t.test(senior_data$pride_in_outcome, young_data$pride_in_outcome, paired = FALSE)
 print(pride_outcome_test)
 ```
-```{r}
-# Check summary statistics for the variables in both groups
-summary(young_data$collab_enjoyment)
-summary(senior_data$collab_enjoyment)
-
-summary(young_data$pride_in_outcome)
-summary(senior_data$pride_in_outcome)
-
-# Check for unique values in both groups for Collab Enjoyment
-unique(young_data$collab_enjoyment)
-unique(senior_data$collab_enjoyment)
-
-# Check for unique values in both groups for Pride in Outcome
-unique(young_data$pride_in_outcome)
-unique(senior_data$pride_in_outcome)
-
-```
 
 The results of the independent t-tests comparing "Collab Enjoyment" and "Pride in Outcome" between "Senior" and "Young" participants show no statistically significant differences. For "Collab Enjoyment," the mean score for "Young" participants (4.64) was slightly higher than that of "Senior" participants (4.36), but the p-value of 0.1308 exceeds the 0.05 threshold, indicating that the difference is not significant. Similarly, for "Pride in Outcome," "Young" participants (mean = 4.68) again reported slightly higher scores than "Senior" participants (mean = 4.38), but the p-value of 0.09563 is also greater than 0.05, suggesting that the difference is not statistically significant at the 5% level. The confidence intervals for both tests include zero, further supporting the conclusion that there is no meaningful difference between the two groups in terms of "Collab Enjoyment" and "Pride in Outcome."
 
 
-```{r}
-# Relevel the survey_type so that "Pre" comes first
-scale_data$survey_type <- factor(scale_data$survey_type, levels = c("Pre", "Post"))
-
-# Boxplot comparing Collab Enjoyment for Pre and Post survey types
-library(ggplot2)
-ggplot(scale_data, aes(x = survey_type, y = `collab_enjoyment`, fill = survey_type)) +
-  geom_boxplot() +
-  labs(title = "Boxplot of Collab Enjoyment by Survey Type", 
-       x = "Survey Type", 
-       y = "Collab Enjoyment") +
-  theme_minimal()
-
-# Boxplot comparing Pride in Outcome for Pre and Post survey types
-ggplot(scale_data, aes(x = survey_type, y = `pride_in_outcome`, fill = survey_type)) +
-  geom_boxplot() +
-  labs(title = "Boxplot of Pride in Outcome by Survey Type", 
-       x = "Survey Type", 
-       y = "Pride in Outcome") +
-  theme_minimal()
-
-```
-```{r}
-# Boxplot comparing Collab Enjoyment for Young and Senior participant types
-ggplot(scale_data, aes(x = Participant_Type, y = `collab_enjoyment`, fill = Participant_Type)) +
-  geom_boxplot() +
-  labs(title = "Boxplot of Collab Enjoyment by Participant Type", x = "Participant Type", y = "Collab Enjoyment") +
-  theme_minimal()
-
-# Boxplot comparing Pride in Outcome for Young and Senior participant types
-ggplot(scale_data, aes(x = Participant_Type, y = `pride_in_outcome`, fill = Participant_Type)) +
-  geom_boxplot() +
-  labs(title = "Boxplot of Pride in Outcome by Participant Type", x = "Participant Type", y = "Pride in Outcome") +
-  theme_minimal()
-
-```
 ```{r}
 
 # Convert empty strings to NA for factors (by first converting them to character)
