@@ -121,9 +121,11 @@ ggplot(summary_stats, aes(x = survey_type, y = mean_collab_enjoyment, fill = sur
   geom_errorbar(aes(ymin = mean_collab_enjoyment - se_collab_enjoyment, 
                     ymax = mean_collab_enjoyment + se_collab_enjoyment), 
                 width = 0.2) +
+  scale_fill_manual(values = c("Pre" = "#E9C46A", "Post" = "#457B9D")) +
   labs(title = "Collab Enjoyment by Survey Type",
        x = "Survey Type", y = "Mean Collab Enjoyment") +
   theme_minimal()
+
 
 # Bar Plot for Pride in Outcome by Survey Type
 ggplot(summary_stats, aes(x = survey_type, y = mean_pride_outcome, fill = survey_type)) +
@@ -131,6 +133,7 @@ ggplot(summary_stats, aes(x = survey_type, y = mean_pride_outcome, fill = survey
   geom_errorbar(aes(ymin = mean_pride_outcome - se_pride_outcome, 
                     ymax = mean_pride_outcome + se_pride_outcome), 
                 width = 0.2) +
+  scale_fill_manual(values = c("Pre" = "#E9C46A", "Post" = "#457B9D")) +
   labs(title = "Pride in Outcome by Survey Type",
        x = "Survey Type", y = "Mean Pride in Outcome") +
   theme_minimal()
@@ -141,9 +144,11 @@ ggplot(summary_participant, aes(x = Participant_Type, y = mean_collab_enjoyment,
   geom_errorbar(aes(ymin = mean_collab_enjoyment - se_collab_enjoyment, 
                     ymax = mean_collab_enjoyment + se_collab_enjoyment), 
                 width = 0.2) +
+  scale_fill_manual(values = c("Young" = "#66c2a5", "Senior" = "#C6A5E4")) +
   labs(title = "Collab Enjoyment by Participant Type",
        x = "Participant Type", y = "Mean Collab Enjoyment") +
   theme_minimal()
+
 
 # Bar Plot for Pride in Outcome by Participant Type
 ggplot(summary_participant, aes(x = Participant_Type, y = mean_pride_outcome, fill = Participant_Type)) +
@@ -151,6 +156,7 @@ ggplot(summary_participant, aes(x = Participant_Type, y = mean_pride_outcome, fi
   geom_errorbar(aes(ymin = mean_pride_outcome - se_pride_outcome, 
                     ymax = mean_pride_outcome + se_pride_outcome), 
                 width = 0.2) +
+  scale_fill_manual(values = c("Young" = "#66c2a5", "Senior" = "#C6A5E4")) +
   labs(title = "Pride in Outcome by Participant Type",
        x = "Participant Type", y = "Mean Pride in Outcome") +
   theme_minimal()

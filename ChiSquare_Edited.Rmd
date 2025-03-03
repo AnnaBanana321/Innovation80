@@ -51,17 +51,16 @@ summary_df <- df_cleaned %>%
 
 # Create the bar plot with vertical error bars and explanation note
 ggplot(summary_df, aes(x = Survey.Type, y = Count, fill = Perspective.Understanding)) +
-  geom_bar(stat = "identity", position = "dodge") +
+  geom_bar(stat = "identity", position = "dodge", alpha = 0.7) +
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
                 position = position_dodge(width = 0.9), width = 0.2) +  # Adds vertical error bars
+  scale_fill_manual(values = c("yes" = "#89CFF0", "no" = "#FF7F50")) +
   labs(title = "Perspective Understanding by Survey Type",
        subtitle = "'Yes' means the participant agrees that younger individuals may not be able to understand their perspective; 'No' means they disagree.",
        x = "Survey Type (Pre/Post)",
        y = "Count ± SE",
        fill = "Perspective Understanding") +
   theme_minimal()
-
-
 
 ```
 
@@ -104,10 +103,10 @@ summary_data <- interaction_data %>%
 
 # Create the bar plot with custom colors and explanation note
 ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Disinterest.in.Interaction)) +
-  geom_bar(stat = "identity", position = "dodge") +
+  geom_bar(stat = "identity", position = "dodge", alpha = 0.7) +
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
                 position = position_dodge(width = 0.9), width = 0.2) +  
-  scale_fill_manual(values = c("Yes" = "#E69F00", "No" = "#56B4E9")) +  
+  scale_fill_manual(values = c("Yes" = "#89CFF0", "No" = "#FF7F50")) +  
   labs(title = "Disinterest in Interaction by Survey Type",
        subtitle = "'Yes' means the participant agrees that younger individuals might be uninterested in interactions; 'No' means they disagree.",
        x = "Survey Type (Pre/Post)",
@@ -170,9 +169,10 @@ summary_data <- summary_data %>%
 
 # Plot the bar chart with error bars and explanation note
 ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Inflexibility.Perception)) +
-  geom_bar(stat = "identity", position = position_dodge(), width = 0.6) +
+  geom_bar(stat = "identity", position = position_dodge(), width = 0.6, alpha = 0.7) +
   geom_errorbar(aes(ymin = Count - Standard_Error, ymax = Count + Standard_Error), 
                 width = 0.2, position = position_dodge(0.6)) +
+  scale_fill_manual(values = c("Yes" = "#89CFF0", "No" = "#FF7F50")) +
   labs(title = "Inflexibility Perception (Pre vs Post)",
        subtitle = "'Yes' means agreeing that older individuals may be inflexible; 'No' means disagreement.",
        x = "Survey Type",
@@ -231,9 +231,10 @@ print(unique(summary_data$Understanding))
 
 # Plot bar chart with error bars and explanation note
 ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Understanding)) +
-  geom_bar(stat = "identity", position = position_dodge(), width = 0.6) +
+  geom_bar(stat = "identity", position = position_dodge(), width = 0.6, alpha = 0.7) +
   geom_errorbar(aes(ymin = Count - Standard_Error, ymax = Count + Standard_Error), 
                 width = 0.2, position = position_dodge(0.6)) +
+  scale_fill_manual(values = c("Yes" = "#89CFF0", "No" = "#FF7F50")) +
   labs(title = "Understanding (Pre vs Post) Among Young Participants",
        subtitle = "'Yes' means agreeing that older individuals may have difficulty understanding them; 'No' means disagreement.",
        x = "Survey Type",
@@ -280,7 +281,8 @@ summary_data <- disinterest_data %>%
 
 # Create the bar plot with error bars and explanation note
 ggplot(summary_data, aes(x = Participant.Type, y = Count, fill = Disinterest.in.Interaction)) +
-  geom_bar(stat = "identity", position = position_dodge(), width = 0.6) +
+  geom_bar(stat = "identity", position = position_dodge(), width = 0.6, alpha = 0.7) +
+  scale_fill_manual(values = c("Yes" = "#89CFF0", "No" = "#FF7F50")) +
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
                 width = 0.2, position = position_dodge(0.6)) +
   labs(title = "Disinterest in Interaction by Participant Type (Strands of Wisdom)",
@@ -331,7 +333,8 @@ summary_data <- perspective_data %>%
 
 # Create the bar plot with error bars and explanation note
 ggplot(summary_data, aes(x = Survey.Type, y = Count, fill = Perspective.Understanding)) +
-  geom_bar(stat = "identity", position = position_dodge(), width = 0.6) +
+  geom_bar(stat = "identity", position = position_dodge(), width = 0.6, alpha = 0.7) + 
+  scale_fill_manual(values = c("Yes" = "#89CFF0", "No" = "#FF7F50")) +
   geom_errorbar(aes(ymin = Count - SE, ymax = Count + SE),
                 width = 0.2, position = position_dodge(0.6)) +
   labs(title = "Perspective Understanding by Survey Type (Strands of Wisdom)",
