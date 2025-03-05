@@ -48,10 +48,25 @@ print(contingency_table)
 
 # Run the Chi-Square test
 chi_sq_test <- chisq.test(contingency_table)
-print(chi_sq_test)
 
+print(chi_sq_test)
+```
+```{r}
+# Convert blank values in Attendance and Meaning.Level to NA
+scale_data_1$Attendance[scale_data_1$Attendance == ""] <- NA
+scale_data_1$Meaning.Level[scale_data_1$Meaning.Level == ""] <- NA
+
+# Remove rows with NA values in Attendance or Meaning.Level
+cleaned_data <- na.omit(scale_data_1[, c("Attendance", "Meaning.Level")])
+
+# Run the Spearman correlation test
+spearman_test <- cor.test(cleaned_data$Attendance, cleaned_data$Meaning.Level, method = "spearman")
+
+# Print the test results
+print(spearman_test)
 
 ```
+
 
 ```{r}
 # Stacked Bar Plot for Attendance and Meaning Level
